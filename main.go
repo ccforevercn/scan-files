@@ -16,7 +16,7 @@ import (
 
 var (
 	// 指定扫描的文件格式
-	ContentFileExt = map[string]bool{ ".php" : true, ".js" : true }
+	ContentFileExt = map[string]bool{}
 	// 扫描的关键字
 	keywords string
 	// 扫描的根目录
@@ -50,7 +50,27 @@ func main()  {
 }
 
 func receive()  {
-	// 获取扫描的关键字
+	// 请输入扫描的文件格式
+	var fileExt string
+	for  {
+		fmt.Printf("请输入扫描的文件格式,类似.go,输入exit即可退出输入文件格式：")
+		fmt.Scanln(&fileExt)
+		fileExtLen := len(fileExt) > 0
+		if fileExtLen {
+			fileExtStatus := fileExt == "exit"
+			if fileExtStatus {
+				break
+			}
+			ContentFileExt[fileExt] = true
+		}
+	}
+	// 获取扫描文件格式的总数
+	ContentFileExtLen := len(ContentFileExt) > 0
+	// 如果为空直接退出程序
+	if !ContentFileExtLen {
+		return
+	}
+	os.Exit(0)
 	for  {
 		fmt.Printf("请输入查找的关键字：")
 		fmt.Scanln(&keywords)
