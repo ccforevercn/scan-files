@@ -70,7 +70,6 @@ func receive()  {
 	if !ContentFileExtLen {
 		return
 	}
-	os.Exit(0)
 	for  {
 		fmt.Printf("请输入查找的关键字：")
 		fmt.Scanln(&keywords)
@@ -144,6 +143,7 @@ func file(fileName string)  {
 				// 关闭文件
 				file.Close()
 			}
+			fmt.Println("搜索结果写入的文件名称：" + writeFilePath)
 		}
 	}
 }
